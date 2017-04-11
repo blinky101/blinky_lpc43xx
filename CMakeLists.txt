@@ -30,7 +30,7 @@ include(${CPM_DIR}/CPM.cmake)
 #-----------------------------------------------------------------------
 
 set(EXE_NAME                blinky_m4)
-set(FLASH_ADDR              0x1A000000)
+set(FLASH_ADDR              0x1A008000)
 set(FLASH_CFG               lpc4337_swd)
 set(DEBUG_BREAKPOINT_LIMIT  6)
 set(DEBUG_WATCHPOINT_LIMIT  4)
