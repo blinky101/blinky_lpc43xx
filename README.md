@@ -1,4 +1,4 @@
-# example_blinky_m4
+# LPC43xx Example Project: Single Core Blinky
 
 Simple Blinky program for the LPC4337 using CPM chip libraries.
 
