@@ -2,7 +2,7 @@
 
 <img src="img/lpc11uxx.jpg" alt="LPC43xx microcontroller chip" width="200">
 
-The LPC43xx microcontrollers are fairly advanced 32 bit dual-core microcontrollers. They have a cortex-m4 as well as a cortex-m0 cpu, both running up to 204MHz. This platform has lots of peripherals, such as integrated high-speed USB 2.0, SGPIO, etc. If you just want do perform simple tasks, the LPC11uxx may be a more suitable solution: it is cheaper and more suitable for beginners.
+The LPC43xx microcontrollers are fairly advanced 32 bit dual-core microcontrollers. They have a cortex-m4 as well as a cortex-m0 cpu, both running at up to 204MHz. This platform has lots of peripherals, such as integrated high-speed USB 2.0, SGPIO, etc. If you just want do perform simple tasks, the [LPC11uxx](../lpc11uxx) may be a more suitable solution: it is cheaper and more suitable for beginners.
 
 The purpose of this guide is to document the steps required to get started on this platform from scratch, using just a few open-source tools.
 
@@ -20,6 +20,7 @@ The purpose of this guide is to document the steps required to get started on th
 ## Tutorials
 
 Build your own blinky project from scratch and understand what is happening with the help of our tutorial.
+**NOTE: tutorials are under construction and will appear soon**
 
 * ~~[Part 0: Getting Started](./getting_started)~~
 * ~~[Part 1: Bare-metal Blinky](./tutorial_part1)~~
