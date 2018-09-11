@@ -1,4 +1,4 @@
-# CPM-based blinky project: lpc43xx (m4 core)
+# CPM-based blinky project: lpc43xx (m4 core, using bootloader)
 
 Simple Blinky program for the LPC4337 using CPM chip libraries.
 
@@ -28,6 +28,10 @@ make
 ### Flash the firware to your board
 
 This assumes you have openocd installed.
+
+Also, note that this project assumes a bootloader is used (see the bootloader43xx_sdcard for example).
+To use this firmware directly without any bootloader, simply edit link.ld and CMakeLists.txt and replace `
+0x1A008000` with `0x1A000000` (this is the address in flash where the firmware is placed).
 
 run this from the build dir, see build step
 ```
