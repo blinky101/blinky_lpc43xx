@@ -7,7 +7,8 @@ static const PINMUX_GRP_T pinmuxing[] = {
         {1, 15, (SCU_MODE_FUNC0)}, //green
         {1, 16, (SCU_MODE_FUNC0)}, //blue
         {1, 17, (SCU_MODE_FUNC0)}, //red
-        {1, 18, (SCU_MODE_FUNC0)}, //yellow
+
+        {1, 18, (SCU_MODE_FUNC0)}, // GPIO0[13]
 };
 
 void board_setup_muxing(void)

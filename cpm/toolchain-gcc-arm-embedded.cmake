@@ -16,6 +16,8 @@ set(CMAKE_AR ${PREFIX}-ar CACHE INTERNAL "archiver")
 set(CMAKE_STRIP ${PREFIX}-strip CACHE INTERNAL "strip")
 set(CMAKE_SIZE ${PREFIX}-size CACHE INTERNAL "size")
 
+set(CMAKE_GDB ${PREFIX}-gdb-py CACHE INTERNAL "gdb")
+
 # Adjust the default behaviour of the FIND_XXX() commands:
 # i)    Search headers and libraries in the target environment
 # ii)   Search programs in the host environment

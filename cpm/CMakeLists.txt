@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5.0 FATAL_ERROR)
 
 set(CMAKE_TOOLCHAIN_FILE    ${CMAKE_SOURCE_DIR}/toolchain-gcc-arm-embedded.cmake)
 
-project(blinky_m4)
+project(blinky_lpc43xx)
 
 #------------------------------------------------------------------------------
 # Required CPM Setup - no need to modify - See: https://github.com/iauns/cpm
@@ -29,21 +29,31 @@ include(${CPM_DIR}/CPM.cmake)
 # Build settings
 #-----------------------------------------------------------------------
 
-set(EXE_NAME                blinky_m4)
+set(EXE_NAME                blinky_lpc43xx)
 set(FLASH_ADDR              0x1A000000)
 set(FLASH_CFG               lpc4337_swd)
 set(DEBUG_BREAKPOINT_LIMIT  6)
 set(DEBUG_WATCHPOINT_LIMIT  4)
 
-set(CMAKE_GDB           arm-none-eabi-gdb)
 
-set(OPT 0)
+# default settings
+set(OPTIMIZE s)
+set(BLACKMAGIC_DEV /dev/ttyBmpGdb)
+set(POWER_TARGET "no")
+
+# Include custom settings
+# (if this file does not exist, copy it from config.cmake.example)
+include(${CMAKE_SOURCE_DIR}/config.cmake)
+
+message(STATUS "Config OPTIMIZE: ${OPTIMIZE}")
+message(STATUS "Config BLACKMAGIC_DEV: ${BLACKMAGIC_DEV}")
+message(STATUS "Config POWER_TARGET: ${POWER_TARGET}")
 
 set(SYSTEM_LIBRARIES    m c gcc)
 
 set(FLAGS_M4 "-mcpu=cortex-m4")
 
-set(C_FLAGS "-O${OPT} -g3 -c -fmessage-length=80 -fno-builtin   \
+set(C_FLAGS "-O${OPTIMIZE} -g3 -c -fmessage-length=80 -fno-builtin   \
     -ffunction-sections -fdata-sections -std=gnu99 -mthumb      \
     -fdiagnostics-color=auto")
 set(C_FLAGS_WARN "-Wall -Wextra -Wno-unused-parameter           \
@@ -74,9 +84,9 @@ CPM_AddModule("lpc_chip_43xx_m4"
     GIT_REPOSITORY "https://github.com/JitterCompany/lpc_chip_43xx_m4.git"
     GIT_TAG "3.2.1")
 
-CPM_AddModule("openocd_tools"
-    GIT_REPOSITORY "https://github.com/JitterCompany/openocd_tools.git"
-    GIT_TAG "1.4")
+CPM_AddModule("mcu_debug"
+    GIT_REPOSITORY "https://github.com/JitterCompany/mcu_debug.git"
+    GIT_TAG "2.1")
 
 CPM_Finish()
 
