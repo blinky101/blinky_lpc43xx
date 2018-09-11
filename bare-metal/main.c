@@ -1,8 +1,6 @@
 
 void blinky(void)
 {
-    // TODO port this from 11uxx to 43xx platform
-
     // configure P1_18 pin function as GPIO0[13]
     (*(volatile unsigned int *)(0x400860C8)) = 0;
 
@@ -12,21 +10,12 @@ void blinky(void)
     while(1) {
 
         // set LED GPIO low
-        (*(volatile unsigned int *)(0x50002280)) = (1 << 7);
+        (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
 
         // set LED GPIO high
-        (*(volatile unsigned int *)(0x50002200)) = (1 << 7);
+        (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
-
-        // Toggle LED (low)
-        (*(volatile unsigned int *)(0x50002300)) = (1 << 7);
-        for (int i = 0; i < 300000; ++i) __asm__("nop");
-
-        // Toggle LED (high)
-        (*(volatile unsigned int *)(0x50002300)) = (1 << 7);
-        for (int i = 0; i < 300000; ++i) __asm__("nop");
-
     }
 }
 

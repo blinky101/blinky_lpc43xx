@@ -88,15 +88,15 @@ This is done using the `GPIO port direction registers` located at address `0x400
 
 **TODO port from 11uxx to 43xx, double check everything is correct**
 
-Now that we did all the preparations we can finally do do the real blinking. We need to toggle the pin between a high state (3.3V) and a low state (0V). There are multiple ways to do this, but for this tutorial we will use the `GPIO port set` and `GPIO port clear` registers. See sections `9.5.3.7` and `9.5.3.8` of the manual. Similarly to the GPIO direction register, we should now write to the 7th bit of the CLEAR and SET registers.
+Now that we did all the preparations we can finally do do the real blinking. We need to toggle the pin between a high state (3.3V) and a low state (0V). There are multiple ways to do this, but for this tutorial we will use the `GPIO port set` and `GPIO port clear` registers. See sections `19.5.3.7` and `19.5.3.8` of the manual. Similarly to the GPIO direction register, we should now write to the 13th bit of the CLEAR and SET registers.
 
 ```
 // set LED GPIO low
-(*(volatile unsigned int *)(0x50002280)) = (1 << 7);
+(*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
 
 
 // set LED GPIO high
-(*(volatile unsigned int *)(0x50002200)) = (1 << 7);
+(*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
 ```
 
 Don't forget to add some delay `for (int i = 0; i < 100000; ++i) __asm__("nop");`so that our slow human eyes can actually see the blinking. The delay is just a for loop that does noting (`__asm__("nop")` is the assembly nop operator, which means no-operation) during 100000 loops
@@ -107,11 +107,11 @@ And finally we wrap it in a `while(1)` loop so that it will go on forever:
 while(1) {
 
     // set LED GPIO low
-    (*(volatile unsigned int *)(0x50002280)) = (1 << 7);
+    (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
     for (int i = 0; i < 100000; ++i) __asm__("nop");
 
     // set LED GPIO high
-    (*(volatile unsigned int *)(0x50002200)) = (1 << 7);
+    (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
     for (int i = 0; i < 100000; ++i) __asm__("nop");
 }
 ```
@@ -121,23 +121,21 @@ Putting all our code inside a function `blinky()` in the main.c file:
 ```
 void blinky(void)
 {
-
-    // configure PIO_7 pin function
-    (*(volatile unsigned int *)(0x4004401C)) = 0;
+    // configure P1_18 pin function as GPIO0[13]
+    (*(volatile unsigned int *)(0x400860C8)) = 0;
 
     // configure GPIO direction
-    (*(volatile unsigned int *)(0x50002000)) |= (1 << 7);
+    (*(volatile unsigned int *)(0x400F6000)) |= (1 << 13);
 
     while(1) {
 
         // set LED GPIO low
-        (*(volatile unsigned int *)(0x50002280)) = (1 << 7);
+        (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
 
         // set LED GPIO high
-        (*(volatile unsigned int *)(0x50002200)) = (1 << 7);
+        (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
-
     }
 }
 ```
