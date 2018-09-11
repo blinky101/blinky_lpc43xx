@@ -84,9 +84,8 @@ This is done using the `GPIO port direction registers` located at address `0x400
 (*(volatile unsigned int *)(0x400F6000)) |= (1 << 13);
 ```
 
-### Toggling the pin high and low
 
-**TODO port from 11uxx to 43xx, double check everything is correct**
+### Toggling the pin high and low
 
 Now that we did all the preparations we can finally do do the real blinking. We need to toggle the pin between a high state (3.3V) and a low state (0V). There are multiple ways to do this, but for this tutorial we will use the `GPIO port set` and `GPIO port clear` registers. See sections `19.5.3.7` and `19.5.3.8` of the manual. Similarly to the GPIO direction register, we should now write to the 13th bit of the CLEAR and SET registers.
 
@@ -143,7 +142,7 @@ void blinky(void)
 Now we can try to compile it with the following command:
 
 ```
-arm-none-eabi-gcc -Wall -Wextra -g3 -O0 -MD -mcpu=cortex-m0 -mthumb -c -o main.o main.c
+arm-none-eabi-gcc -Wall -Wextra -g3 -O0 -MD -mcpu=cortex-m4 -mthumb -c -o main.o main.c
 ```
 If everything went OK we didn't get any warning or errors and now we have a `main.o` object file in our directory. Unfortunately, we're not quite ready to run this code on our hardware.
 
@@ -161,13 +160,13 @@ For this project, the minimum viable linker file is as follows
 
 MEMORY
 {
-  /* Define each memory region */
-  Flash (rx) : ORIGIN = 0x0, LENGTH = 0x8000 /* 32K bytes */
-  RAM (rwx) : ORIGIN = 0x10000000, LENGTH = 0x0800 /* 2K bytes */
+  /* common memory layout for all flash-based 43xx parts */
+  Flash (rx) : ORIGIN = 0x1a000000, LENGTH = 0x40000 /* 256kB */
+  RAM (rwx) : ORIGIN = 0x10080000, LENGTH = 0xA000 /* 40kB */
 }
 
 /* Define a symbol for the top of each memory region */
-__top_RAM = 0x10000000 + 0x2000;
+__top_RAM = ORIGIN(RAM) + LENGTH(RAM);
 
 /* reset_vector is the entry point of the program */
 ENTRY(blinky)
@@ -186,8 +185,8 @@ SECTIONS
     /* Pointer to top of the stack */
     PROVIDE(_vStackTop = __top_RAM - 0);
 
-    /* Calculate the usercode checksum as per the LPC11uxx user manual:
-     * UM10452, chapter 20.7.
+    /* Calculate the usercode checksum as per the LPC43xx user manual:
+     * UM10503, chapter 6.4.4.1 "Criterion for Valid User Code".
      */
     PROVIDE(__valid_user_code_checksum = 0 -
         (_vStackTop
@@ -201,19 +200,20 @@ SECTIONS
     );
 }
 
+
 ```
 We can just copy this to `link.ld`.
 
 #### Memory section
 
-The linker file starts with a memory section. This section defines all the memory available, which for the LPC11uxx is Flash and RAM. If we take a look at the memory map in chapter 2.2 of the manual, we see that there is on-chip flash starting at address `0x0000 0000` which has a size of 32 kB on the LPC11u14. Additionally, there is 2kB or RAM located at address `0x1000 0000`.
+The linker file starts with a memory section. This section defines all the memory available, which for the flash-based LPC43xx is Flash and RAM. If we take a look at the memory map in chapter 3.5 of the manual, we see that there is on-chip flash starting at address `0x1a00 0000` which has a size of at least 256 kB (depending on the exact model, the lpc4337 has the most: 2x512 kB). Additionally, there are multiple blocks of RAM. For now, we only use the 40kB of RAM located at address `0x1008 0000`.
 
 ```
 MEMORY
 {
-  /* Define each memory region */
-  Flash (rx) : ORIGIN = 0x0, LENGTH = 0x8000 /* 32K bytes */
-  RAM (rwx) : ORIGIN = 0x10000000, LENGTH = 0x0800 /* 2K bytes */
+  /* common memory layout for all flash-based 43xx parts */
+  Flash (rx) : ORIGIN = 0x1a000000, LENGTH = 0x40000 /* 256kB */
+  RAM (rwx) : ORIGIN = 0x10080000, LENGTH = 0xA000 /* 40kB */
 }
 ```
 
@@ -224,7 +224,7 @@ The rest of the linker file, which consists mostly of the `SECTIONS` section, te
 #### Interrupt Vector Table
 
 Finally we need to add this code to `main.c`. The special compiler attribute `__attribute__ ((section(".interrupt_vector_table")))` makes sure that the following `interrupt_vector_table` struct will be placed at the correct memory address as defined in the linker file.
-This table is defined by the Cortex-M0 architecture. It will always start with the stack pointer followed by the reset interrupt vector. We have pointed the `.reset` to our blinky function so that the microcontroller will start code execution there.
+This table is defined by the Cortex-M4 architecture. It will always start with the stack pointer followed by the reset interrupt vector. We have pointed the `.reset` to our blinky function so that the microcontroller will start code execution there.
 
 
 ```
@@ -237,9 +237,10 @@ __attribute__ ((section(".interrupt_vector_table")))
 struct {
     void *stack;
     void (*reset)(void);
-    void *_unused[5];
+    void *_unused_m4[5];
     unsigned int checksum;
-    void *__unused[40];
+    void *__unused_m4[8];
+    void *__unused_chip[53];
 } interrupt_vector_table = {
 
     .stack = &_vStackTop,
@@ -250,7 +251,7 @@ struct {
 
 #### Checksum
 
-The checksum is a special LPC feature which is used by the onboard LPC bootloader to determine whether a valid program exists in flash memory: if the checksum does not match, the bootloader will refuse to start our program. The linker file calculates the correct value and the interrupt vector table makes sure it is placed at the correct location. See chapter `20.7` of the user manual.
+The checksum is a special LPC feature which is used by the onboard LPC bootloader to determine whether a valid program exists in flash memory: if the checksum does not match, the bootloader will refuse to start our program. The linker file calculates the correct value and the interrupt vector table makes sure it is placed at the correct location. See chapter `6.4.4.1` of the user manual.
 
 
 ## Compile and link and flash
@@ -258,8 +259,8 @@ The checksum is a special LPC feature which is used by the onboard LPC bootloade
 Now we have everything to run our code. Issue the following commands to compile and link our code respectively.
 
 ```
-arm-none-eabi-gcc -Wall -Wextra -g3 -O0 -MD -mcpu=cortex-m0 -mthumb -c -o main.o main.c
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -nostartfiles -Wl,-T,link.ld -o blinky.elf main.o -lc -lnosys
+arm-none-eabi-gcc -Wall -Wextra -g3 -O0 -MD -mcpu=cortex-m4 -mthumb -c -o main.o main.c
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -nostartfiles -Wl,-T,link.ld -o blinky.elf main.o -lc -lnosys
 ```
 
 After this we should have a `blinky.elf` file. We can flash our code to the board using the Black Magic Probe:
@@ -271,7 +272,6 @@ arm-none-eabi-gdb -nx --batch \
 -ex 'attach 1' \
 -ex 'load' \
 -ex 'set mem inaccessible-by-default off' \
--ex 'set {int}0x40048000 = 2' \
 -ex 'compare-sections' \
 -ex 'kill' \
 blinky.elf
@@ -279,7 +279,7 @@ blinky.elf
 
 <!--  See [TODO] for more detailed information about flashing your target board. -->
 
-> **Note: The completed project can be downloaded from the [blinky_lpc11uxx repository](https://github.com/blinky101/blinky_lpc11uxx/tree/master/bare-metal/).**
+> **Note: The completed project can be downloaded from the [blinky_lpc43xx repository](https://github.com/blinky101/blinky_lpc43xx/tree/master/bare-metal/).**
 
 
 <div class="tutorial_nav">

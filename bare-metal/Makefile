@@ -1,7 +1,7 @@
 CROSS_COMPILE = arm-none-eabi-
 CC = $(CROSS_COMPILE)gcc
 OBJCOPY = $(CROSS_COMPILE)objcopy
-CPUFLAGS = -mcpu=cortex-m0 -mthumb
+CPUFLAGS = -mcpu=cortex-m4 -mthumb
 CFLAGS = -Wall -Wextra -g3 -O0 -MD $(CPUFLAGS)
 LDFLAGS = $(CPUFLAGS) -nostartfiles -Wl,-T,link.ld
 LDLIBS = -lc -lnosys

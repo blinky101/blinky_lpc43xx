@@ -1,5 +1,4 @@
 
-/* TODO verify this works on 43xx */
 MEMORY
 {
   /* common memory layout for all flash-based 43xx parts */
@@ -27,8 +26,8 @@ SECTIONS
     /* Pointer to top of the stack */
     PROVIDE(_vStackTop = __top_RAM - 0);
 
-    /* Calculate the usercode checksum as per the LPC11uxx user manual:
-     * UM10452, chapter 20.7.
+    /* Calculate the usercode checksum as per the LPC43xx user manual:
+     * UM10503, chapter 6.4.4.1 "Criterion for Valid User Code".
      */
     PROVIDE(__valid_user_code_checksum = 0 -
         (_vStackTop
