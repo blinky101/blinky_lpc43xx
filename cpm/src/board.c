@@ -4,11 +4,12 @@
 static const PINMUX_GRP_T pinmuxing[] = {
 
         // Board LEDs 
-        {1, 15, (SCU_MODE_FUNC0)}, //green
-        {1, 16, (SCU_MODE_FUNC0)}, //blue
-        {1, 17, (SCU_MODE_FUNC0)}, //red
 
+        // jitter breakout
         {1, 18, (SCU_MODE_FUNC0)}, // GPIO0[13]
+
+        // ngx xplorer
+        {2, 12, (SCU_MODE_FUNC0)}, // GPIO1[12]
 };
 
 void board_setup_muxing(void)
@@ -18,12 +19,13 @@ void board_setup_muxing(void)
 
 void board_setup_GPIO(void)
 {
-    // blue
+    // jitter breakout
     Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, 13);
     Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 13, false);
-    // red
-    Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, 2);
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 2, false);
+
+    // ngx xplorer
+    Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 1, 12);
+    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 1, 12, false);
 }
 
 void board_setup_pins(void)

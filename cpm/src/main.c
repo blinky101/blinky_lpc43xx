@@ -16,11 +16,18 @@ volatile bool led_state = false;
 void SysTick_Handler(void)
 {
     Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, 0, 13);
+    Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, 1, 12);
 }
 
 int main(void) {
     board_setup_pins();
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 2, true);
+
+    // jitter breakout
+    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 13, true);
+
+    // ngx xplorer
+    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 1, 12, true);
+
     fpuInit();
 
 	SystemCoreClockUpdate();
