@@ -19,6 +19,9 @@ These need to be installed and available in your PATH.
 
 Clone the project, and inside the project folder do:
 ```
+cp config.cmake.example config.cmake
+# review the settings in config.cmake
+
 mkdir build
 cd build
 cmake ..
