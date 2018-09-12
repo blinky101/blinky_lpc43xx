@@ -4,6 +4,8 @@ title: Tutorial Part 1
 
 # Tutorial blinky lpc43xx
 
+**TODO FIXME: This tutorial assumes P1_18, while the intro assumes P2_12!**
+
 This tutorials shows you how to create a blinky project for the lpc4337 microcontroller from scratch without any software dependencies. This tutorial should work for all flash-based lpc43xx parts.
 
 In this tutorial we will learn about

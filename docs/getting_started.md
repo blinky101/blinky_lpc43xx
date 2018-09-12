@@ -77,7 +77,7 @@ Kill the program being debugged? (y or n) [answered Y; input not from terminal]
 ```
 
 If all goes well, you have succesfully uploaded your first program!
-You should now see a blinking LED (assuming your board has an LED attached to pin PI0_7).
+You should now see a blinking LED (assuming your board has an LED attached to pin P2_12).
 <img src="img/xplorer_blink.jpg" alt="A blinking led" width="600">
 
 <div class="tutorial_nav">
