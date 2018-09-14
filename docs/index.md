@@ -26,3 +26,8 @@ Build your own blinky project from scratch and understand what is happening with
 * ~~[Part 2: Basic Blinky](./tutorial_part2)~~ **Under construction**
 * ~~[Part 3: CPM Blinky](./tutorial_part3)~~  **Under construction**
 
+## Repository
+
+Each part of the tutorials result in a working blinky project. All projects (and also this website itself) can be found in the [blinky_lpc43xx repository](https://github.com/blinky101/blinky_lpc43xx).
+If you see room for improvement on the code or tutorials, feel free to contribute on [Github](https://github.com/blinky101).
+
