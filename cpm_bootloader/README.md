@@ -4,7 +4,10 @@ Simple Blinky program for the LPC4337 using CPM chip libraries.
 
 This projects assumes our specific breakout board for the LPC4337 chip, however it is easily adapted to different board configurations.
 
-![](board.jpg)
+**NOTE:** this project assumes a **flash-based** lpc43xx microcontroller, such as the lpc4337. (there are also *flashless* lpc43xx microcontrollers that don't have internal flash memory).
+
+**NOTE** this project assumes you are running a compatible bootloader, for example the [bootloader43xx_sdcard](https://github.com/JitterCompany/bootloader43xx_sdcard)
+
 ## How To Use
 
 ### Prerequisites
@@ -29,7 +32,7 @@ make
 
 This assumes you have openocd installed.
 
-Also, note that this project assumes a bootloader is used (see the bootloader43xx_sdcard for example).
+Also, note that this project assumes a bootloader is used (see the [bootloader43xx_sdcard](https://github.com/JitterCompany/bootloader43xx_sdcard) for example).
 To use this firmware directly without any bootloader, simply edit link.ld and CMakeLists.txt and replace `
 0x1A008000` with `0x1A000000` (this is the address in flash where the firmware is placed).
 

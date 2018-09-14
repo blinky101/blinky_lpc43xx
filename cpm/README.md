@@ -2,9 +2,11 @@
 
 Simple Blinky program for the LPC4337 using CPM chip libraries.
 
-This projects assumes our specific breakout board for the LPC4337 chip, however it is easily adapted to different board configurations.
+This projects assumes a lpc4337-based [lpc4330-xplorer board](https://www.nxp.com/support/developer-resources/nxp-designs/lpc4330-xplorer-board:OM13027), however it is easily adapted to different board configurations.
 
-![](board.jpg)
+**NOTE:** this project assumes a **flash-based** lpc43xx microcontroller, such as the lpc4337. (there are also *flashless* lpc43xx microcontrollers that don't have internal flash memory).
+
+
 ## How To Use
 
 ### Prerequisites
