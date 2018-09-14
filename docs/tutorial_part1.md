@@ -4,8 +4,6 @@ title: Tutorial Part 1
 
 # Tutorial blinky lpc43xx
 
-**TODO FIXME: This tutorial assumes P1_18, while the intro assumes P2_12!**
-
 This tutorials shows you how to create a blinky project for the lpc4337 microcontroller from scratch without any software dependencies. This tutorial should work for all flash-based lpc43xx parts.
 
 In this tutorial we will learn about
@@ -41,63 +39,64 @@ This will create the (empty) files in the required directory.
 
 ## Step 2: Writing the code
 
-Remember, our goal, and our only goal is to blink the LED on pin P1_18. Toggling a pin is done through the GPIO perihperal. But first we need to make sure that the pin is available for the GPIO peripheral. This is usually called pin multiplexing. The more complex a microcontroller is, the more functions are available per pin.
+Remember, our goal, and our only goal is to blink the LED on pin P2_12. Toggling a pin is done through the GPIO perihperal. But first we need to make sure that the pin is available for the GPIO peripheral. This is usually called pin multiplexing. The more complex a microcontroller is, the more functions are available per pin.
 
 
 ### Pin multiplexing
 
-We will need information from the [manual (UM10503)](https://www.nxp.com/docs/en/user-guide/UM10503.pdf). In `Chapter 17 System Control Unit / IO Configuration` we can find the relevant information. More specifically section `17.4 table 190` shows the adresses of the pins, `17.4.1 table 191` shows the settings that are applicable to pin P1_18.
-The first 3 bits `2:0 FUNC` determine the selected function of the pin. The available options are listed in `Chapter 16.2.3 table 187`:
+We will need information from the [manual (UM10503)](https://www.nxp.com/docs/en/user-guide/UM10503.pdf). In `Chapter 17 System Control Unit / IO Configuration` we can find the relevant information. More specifically section `17.4 table 190` shows the adresses of the pins, `17.4.1 table 191` shows the settings that are applicable to pin P2_12.
+The first 3 bits `2:0 FUNC` determine the selected function of the pin. The available options for each pin are listed in `Chapter 17.3.11 table 189` (see also `Chapter 16.2.3 table 187`):
 
-* `0x0: GPIO0[13]` - use the pin as GPIO 0_13. This is what we need.
-* `0x1: U2_DIR` - Uart peripheral: direction control for USART2.
+* `0x0: GPIO1[12]` - use the pin as GPIO 1_12. This is what we need.
+* `0x1: CTOUT_4` - SCT peripheral: output 4
 * `0x2: R` - Reserved
-* `0x3: ENET_TXD0` - Ethernet peripheral: transmit data 0.
-* `0x4: T0_MAT3` - Timer 0 peripheral: match output 3 for timer 0.
-* `0x5: CAN1_RD` - CAN peripheral: receiver input.
-* `0x6: SGPIO12` - SGPIO peripheral: I/O 12.
-* `0x7: EMC_D10` - External memory peripheral: data line 10.
+* `0x3: EMC_A3` - External memory peripheral: address line 3.
+* `0x4: R` - Reserved
+* `0x5: R` - Reserved
+* `0x6: R` - Reserved
+* `0x7: U2_UCLK` - USART2 peripheral: clock (for synchronous mode).
 
-The other fields of this register we can ignore for now. Because we want the pin to be a GPIO pin, we need to write `0b00` to the first 2 bits of the register. The manual shows that the `P1_18 register` is located at memory address `0x4008 60C8`.
+The other fields of this register we can ignore for now. Because we want the pin to be a GPIO pin, we need to write `0b00` to the first 2 bits of the register. The manual shows that the `P2_12 register` is located at memory address `0x4008 6130`.
 This results in our first line of c code:
 
 ```
-// configure P1_18 pin function as GPIO0[13]
-(*(volatile unsigned int *)(0x400860C8)) = 0;
+// configure P2_12 pin function as GPIO1[12]
+(*(volatile unsigned int *)(0x40086130)) = 0;
 ```
-What this does: First we cast the address to an *int pointer*: `(volatile unsigned int *)(0x400860C8)`. Then we dereference it and write a zero to the memory location `0x4008 60C8` (which is not actually memory: it is a specific IO configuration register, which is memory-mapped at that address).
+What this does: First we cast the address to an *int pointer*: `(volatile unsigned int *)(0x40086130)`. Then we dereference it and write a zero to the memory location `0x4008 6130` (which is not actually memory: it is a specific IO configuration register, which is memory-mapped at that address).
 
 *Note that it is not very good practice to write (anything) to reserved register values, since it can have unintended side effects, but in this case it is harmless. The better way is to first read the value, then only set or clear the bits you want to change and then write the value back.*
 
 
 ### Translating pin numbers to GPIO numbers
 
-As you may have noticed in the previous section, pin `P1_18` is configured as GPIO `0_13`. On simpler platforms such as the [lpc11uxx](../blinky_lpc11uxx), the pin and GPIO numbers are usually the same. On this chip however, the GPIO numbers are different from the pin numbers (which are different from the physical footprint pin numbers). Two similar GPIO numbers may map to completely different pin numbers! To avoid confusing, we always prefix **P**in numbers with a **P**.
+As you may have noticed in the previous section, pin `P2_12` is configured as GPIO `1_12`. On simpler platforms such as the [lpc11uxx](../blinky_lpc11uxx), the pin and GPIO numbers are usually the same. On this chip however, the GPIO numbers are different from the pin numbers (which are different from the physical footprint pin numbers). Two similar GPIO numbers may map to completely different pin numbers! To avoid confusing, we always prefix **P**in numbers with a **P**.
 
 
 ### GPIO configuration
 
 Now that the pin belongs to the GPIO peripheral, we can configure it as an output pin.
 
-This is done using the `GPIO port direction registers` located at address `0x400F 6000` (see `chapter 19.5.3.3` of the manual). This 32-bit register defines a `DIR`-bit for every pin in GPIO Port 0. So, bit 0 corresponds with GPIO `0_0`, bit 1 with GPIO `0_1`, etc. Thus we need to set bit 13 to control the direction of GPIO `0_13`. Our second line of code is
+**TODO register offset for port 1**
+This is done using the `GPIO port direction registers` located at address `0x400F 6000` (see `chapter 19.5.3.3` of the manual). We are going to set GPIO `1_1`, which means pin 1 on port 1, so we need the DOR register for port 1 at `0x400F 6004`. This 32-bit register defines a `DIR`-bit for every pin in GPIO Port 1. So, bit 0 corresponds with GPIO `1_0`, bit 1 with GPIO `1_1`, etc. Thus we need to set bit 12 to control the direction of GPIO `1_12`. Our second line of code is
 
 ```
 // configure GPIO direction
-(*(volatile unsigned int *)(0x400F6000)) |= (1 << 13);
+(*(volatile unsigned int *)(0x400F6004)) |= (1 << 12);
 ```
 
 
 ### Toggling the pin high and low
 
-Now that we did all the preparations we can finally do do the real blinking. We need to toggle the pin between a high state (3.3V) and a low state (0V). There are multiple ways to do this, but for this tutorial we will use the `GPIO port set` and `GPIO port clear` registers. See sections `19.5.3.7` and `19.5.3.8` of the manual. Similarly to the GPIO direction register, we should now write to the 13th bit of the CLEAR and SET registers.
+Now that we did all the preparations we can finally do do the real blinking. We need to toggle the pin between a high state (3.3V) and a low state (0V). There are multiple ways to do this, but for this tutorial we will use the `GPIO port set` and `GPIO port clear` registers. See sections `19.5.3.7` and `19.5.3.8` of the manual. Similarly to the GPIO direction register, we should now write to the 12th bit of the CLEAR and SET registers for port 1:
 
 ```
 // set LED GPIO low
-(*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
+(*(volatile unsigned int *)(0x400F6284)) = (1 << 12);
 
 
 // set LED GPIO high
-(*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
+(*(volatile unsigned int *)(0x400F6204)) = (1 << 12);
 ```
 
 Don't forget to add some delay `for (int i = 0; i < 100000; ++i) __asm__("nop");`so that our slow human eyes can actually see the blinking. The delay is just a for loop that does noting (`__asm__("nop")` is the assembly nop operator, which means no-operation) during 100000 loops
@@ -108,11 +107,11 @@ And finally we wrap it in a `while(1)` loop so that it will go on forever:
 while(1) {
 
     // set LED GPIO low
-    (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
+    (*(volatile unsigned int *)(0x400F6284)) = (1 << 12);
     for (int i = 0; i < 100000; ++i) __asm__("nop");
 
     // set LED GPIO high
-    (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
+    (*(volatile unsigned int *)(0x400F6204)) = (1 << 12);
     for (int i = 0; i < 100000; ++i) __asm__("nop");
 }
 ```
@@ -122,20 +121,20 @@ Putting all our code inside a function `blinky()` in the main.c file:
 ```
 void blinky(void)
 {
-    // configure P1_18 pin function as GPIO0[13]
-    (*(volatile unsigned int *)(0x400860C8)) = 0;
+    // configure P2_12 pin function as GPIO1[12]
+    (*(volatile unsigned int *)(0x40086130)) = 0;
 
     // configure GPIO direction
-    (*(volatile unsigned int *)(0x400F6000)) |= (1 << 13);
+    (*(volatile unsigned int *)(0x400F6004)) |= (1 << 12);
 
     while(1) {
 
         // set LED GPIO low
-        (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
+        (*(volatile unsigned int *)(0x400F6284)) = (1 << 12);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
 
         // set LED GPIO high
-        (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
+        (*(volatile unsigned int *)(0x400F6204)) = (1 << 12);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
     }
 }

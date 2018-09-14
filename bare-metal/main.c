@@ -1,20 +1,20 @@
 
 void blinky(void)
 {
-    // configure P1_18 pin function as GPIO0[13]
-    (*(volatile unsigned int *)(0x400860C8)) = 0;
+    // configure P2_12 pin function as GPIO1[12]
+    (*(volatile unsigned int *)(0x40086130)) = 0;
 
     // configure GPIO direction
-    (*(volatile unsigned int *)(0x400F6000)) |= (1 << 13);
+    (*(volatile unsigned int *)(0x400F6004)) |= (1 << 12);
 
     while(1) {
 
         // set LED GPIO low
-        (*(volatile unsigned int *)(0x400F6280)) = (1 << 13);
+        (*(volatile unsigned int *)(0x400F6284)) = (1 << 12);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
 
         // set LED GPIO high
-        (*(volatile unsigned int *)(0x400F6200)) = (1 << 13);
+        (*(volatile unsigned int *)(0x400F6204)) = (1 << 12);
         for (int i = 0; i < 100000; ++i) __asm__("nop");
     }
 }
