@@ -7,5 +7,3 @@ This repositories contains three blinky programs, in increasing order of complex
 2. ~~basic~~ (**TODO: not implemented yet**): Some of the low-level stuff is in separate functions, but still a very simple c program.
 3. [cpm](/cpm/): Using CPM as c package manager: reuseable dependencies are in separate repositories.
 3. [cpm_bootloader](/cpm_bootloader/): Same as [cpm](/cpm/), but used in combination with a custom bootloader.
-
-This projects assumes our specific breakout board for the LPC43xx chip, however it is easily adapted to different board configurations, as the project only uses one GPIO pin to blink a LED.
