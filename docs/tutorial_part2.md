@@ -19,6 +19,7 @@ We still need to:
 1. store global variables in flash memory
 2. copy non-constant globals from flash to ram before the `main()` program runs
 3. set all uninitialized global variables to zero before `main()` runs
+4. create a `main()` function that blinks the leds with a nice api
 
 See the [lpc11uxx tutorial](../blinky_lpc11uxx/tutorial_part2) for a more in-depth explanation of how this is done, it is basically the same for the lpc43xx.
 
