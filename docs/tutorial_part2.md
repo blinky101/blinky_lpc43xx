@@ -19,7 +19,7 @@ We still need to:
 1. store global variables in flash memory
 2. copy non-constant globals from flash to ram before the `main()` program runs
 3. set all uninitialized global variables to zero before `main()` runs
-```
+
 See the [lpc11uxx tutorial](../blinky_lpc11uxx/tutorial_part2) for a more in-depth explanation of how this is done, it is basically the same for the lpc43xx.
 
 ## The linker script
@@ -151,6 +151,7 @@ When you call `prepare_startup()` at the beginning of the program, the code shou
 
 ## Refactoring: startup code
 
+**TODO this needs to be updated: this content is for lpc11uxx to lpc43xx**
 Hopefully this was a good demonstration of what the startup code does and why you need it. While it is good to know how it works, you almost never need to change it and will share it across many projects. A nice way to refactor this is to put all the startup-related code in a separate file. In this case, we could rename `main.c` to `startup.c` and add an empty `main.c`, containing just this:
 ```
 int main()
@@ -165,7 +166,7 @@ Now we have clearly divided the program in two parts:
 
 ## Refactoring: chip library
 
-**TODO port this from lpc11uxx to lpc43xx**
+**TODO this needs to be updated: this content is for lpc11uxx to lpc43xx**
 Now that we finaly have a sane c environment, a good next step would be to refactor the blinky logic itself. After all, it is not very fun to have to remember the memory addresses of every peripheral. There are so many peripherals and features on even a simple microcontroller like this, so writing a header file would be a lot of work. Fortunately, these files are already available.
 
 This already simplifies toggling a LED:
