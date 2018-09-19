@@ -55,8 +55,7 @@ To initialize the `.data` and `.bss` sections, we must know where they are in me
 * a data_section_table: a table with one entry: the properties of the `.data` section
 * a bss_section_table: another table with one entry: the properties of the `.bss` section
 
-We must also store some metadata so that our startup code knows where the *.data* and *.bss* sections are.
-To do this, we change the *.text* section to include a table of data and bss sections:
+After adding the section table, the *.text* section looks like this:
 
 ```
 .text : ALIGN(4)
@@ -152,34 +151,25 @@ When you call `prepare_startup()` at the beginning of the program, the code shou
 
 ## Refactoring: startup code
 
-**TODO this needs to be updated: this content is for lpc11uxx to lpc43xx**
-Hopefully this was a good demonstration of what the startup code does and why you need it. While it is good to know how it works, you almost never need to change it and will share it across many projects. A nice way to refactor this is to put all the startup-related code in a separate file. In this case, we could rename `main.c` to `startup.c` and add an empty `main.c`, containing just this:
-```
-int main()
-{
-    while(1);
-}
-```
-Then move the blinking logic to `int main()` and call `main()` from the end of the startup code.
-Now we have clearly divided the program in two parts:
-* `startup.c` manages the low-level details of setting up a valid c runtime environment
-* `main.c` contains the usual main() function: this code can use the normal c features that you expect.
+While it is good to know that startup code is required and how it works, you almost never need to change it and will share it across many projects. A common way to do this is to put all the startup-related code in a separate file, then calling `main()` at the end of the startup code. `main` can then be implemented to do the normal tasks for your projects, such as blinking LEDs without worrying about setting up the c runtime requirements.
+
+See [the repository for this project](https://github.com/blinky101/blinky_lpc43xx/tree/master/basic/) for an example.
+
 
 ## Refactoring: chip library
 
-**TODO this needs to be updated: this content is for lpc11uxx to lpc43xx**
-Now that we finaly have a sane c environment, a good next step would be to refactor the blinky logic itself. After all, it is not very fun to have to remember the memory addresses of every peripheral. There are so many peripherals and features on even a simple microcontroller like this, so writing a header file would be a lot of work. Fortunately, these files are already available.
+Now that we finaly have a sane c environment, a good next step would be to refactor the blinky logic itself. After all, who likes looking up memory addresses for every peripheral? Especially the lpc43xx platform has a lot of peripherals and features, some of which can be fairly complex to setup. We can make the code a lot more readable by intruduce header files which define some structs and constants with names that closely match the names in the datasheet. Fortunately, these header files are already available.
 
 This already simplifies toggling a LED:
 ```diff
-- (*(volatile unsigned int *)(0x50002300)) = (1 << 7);
-+ LPC_GPIO->NOT[0] |= (1 << 7)
+- (*(volatile unsigned int *)(0x400F6204)) = (1 << 12);
++ LPC_GPIO_PORT->SET[1] |= (1 << 12)
 ```
 
 On top of that, you could write some wrapper functions / macros to make it even nicer:
 ```diff
-- LPC_GPIO->NOT[0] |= (1 << 7)
-+ chip_gpio_toggle(0,7);
+- LPC_GPIO_PORT->SET[1] |= (1 << 12)
++ chip_gpio_set(1,12);
 ```
 Have a look at [the 'basic' project from the repository](https://github.com/blinky101/blinky_lpc43xx/tree/master/basic/) to see the end result: main.c contains just the blinky logic, startup.c contains all the startup stuff and the other files form a very basic chip library.
 
