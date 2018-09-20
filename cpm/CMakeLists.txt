@@ -76,13 +76,13 @@ set(FLASH_FILE          ${PROJECT_BINARY_DIR}/flash.cfg)
 # CPM Modules
 #------------------------------------------------------------------------------
 
-CPM_AddModule("43xx_m4_startup"
-    GIT_REPOSITORY "https://github.com/JitterCompany/43xx_m4_startup.git"
-    GIT_TAG "1.1")
+CPM_AddModule("startup_lpc43xx_m4"
+    GIT_REPOSITORY "https://github.com/JitterCompany/startup_lpc43xx_m4.git"
+    GIT_TAG "1.2")
 
-CPM_AddModule("lpc_chip_43xx_m4"
-    GIT_REPOSITORY "https://github.com/JitterCompany/lpc_chip_43xx_m4.git"
-    GIT_TAG "3.2.1")
+CPM_AddModule("chip_lpc43xx_m4"
+    GIT_REPOSITORY "https://github.com/JitterCompany/chip_lpc43xx_m4.git"
+    GIT_TAG "3.3.0")
 
 CPM_AddModule("mcu_debug"
     GIT_REPOSITORY "https://github.com/JitterCompany/mcu_debug.git"
