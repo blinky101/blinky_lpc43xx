@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:LPC43xx_blinky_board-cache
 EELAYER 26 0
 EELAYER END
 $Descr A3 16535 11693
@@ -1132,4 +1133,114 @@ F 3 "http://www.farnell.com/datasheets/2085571.pdf" H 10350 3500 50  0001 C CNN
 	1    10350 3500
 	1    0    0    -1  
 $EndComp
+$Comp
+L JitterLib:SST26VF032B U?
+U 1 1 5BA95B3D
+P 9050 5350
+F 0 "U?" H 8750 5800 50  0000 C CNN
+F 1 "SST26VF032B" H 8850 5000 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 8600 6150 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2245044.pdf" H 8750 6250 50  0001 C CNN
+	1    9050 5350
+	1    0    0    -1  
+$EndComp
+Text Notes 8000 4300 0    118  ~ 24
+== Spifi Flash ==
+$Comp
+L power:GND #PWR?
+U 1 1 5BA97034
+P 9200 5750
+F 0 "#PWR?" H 9200 5500 50  0001 C CNN
+F 1 "GND" H 9205 5577 50  0000 C CNN
+F 2 "" H 9200 5750 50  0001 C CNN
+F 3 "" H 9200 5750 50  0001 C CNN
+	1    9200 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5BA97097
+P 9200 4700
+F 0 "#PWR?" H 9200 4550 50  0001 C CNN
+F 1 "+3V3" H 9215 4873 50  0000 C CNN
+F 2 "" H 9200 4700 50  0001 C CNN
+F 3 "" H 9200 4700 50  0001 C CNN
+	1    9200 4700
+	1    0    0    -1  
+$EndComp
+Text Label 4050 9400 0    50   ~ 0
+SPIFI_SCK
+Text Label 4050 9500 0    50   ~ 0
+SPIFI_SIO3
+Text Label 4050 9600 0    50   ~ 0
+SPIFI_SIO2
+Text Label 4050 9700 0    50   ~ 0
+SPIFI_MISO
+Wire Wire Line
+	4050 9400 3950 9400
+Wire Wire Line
+	3950 9500 4050 9500
+Wire Wire Line
+	4050 9600 3950 9600
+Text Label 4050 9800 0    50   ~ 0
+SPIFI_MOSI
+Wire Wire Line
+	3950 9700 4050 9700
+Wire Wire Line
+	3950 9800 4050 9800
+Text Label 4050 9900 0    50   ~ 0
+SPIFI_CS
+Wire Wire Line
+	4050 9900 3950 9900
+Text Label 9650 5350 0    50   ~ 0
+SPIFI_SCK
+Text Label 7950 5450 0    50   ~ 0
+SPIFI_SIO3
+Text Label 7950 5350 0    50   ~ 0
+SPIFI_SIO2
+Text Label 7950 5250 0    50   ~ 0
+SPIFI_MISO
+Wire Wire Line
+	9650 5350 9550 5350
+Text Label 7950 5150 0    50   ~ 0
+SPIFI_MOSI
+Text Label 9650 5450 0    50   ~ 0
+SPIFI_CS
+Wire Wire Line
+	9650 5450 9550 5450
+Wire Wire Line
+	8600 5450 7950 5450
+Wire Wire Line
+	7950 5150 8600 5150
+Wire Wire Line
+	7950 5250 8600 5250
+Wire Wire Line
+	7950 5350 8600 5350
+$Comp
+L Device:C_Small C?
+U 1 1 5BAF7B28
+P 9700 4800
+F 0 "C?" H 9800 4950 50  0000 L CNN
+F 1 "100nF" H 9800 4850 50  0000 L CNN
+F 2 "" H 9700 4800 50  0001 C CNN
+F 3 "~" H 9700 4800 50  0001 C CNN
+	1    9700 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BAF7C82
+P 9700 4900
+F 0 "#PWR?" H 9700 4650 50  0001 C CNN
+F 1 "GND" H 9705 4727 50  0000 C CNN
+F 2 "" H 9700 4900 50  0001 C CNN
+F 3 "" H 9700 4900 50  0001 C CNN
+	1    9700 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9700 4700 9200 4700
+Wire Wire Line
+	9200 4700 9200 4950
+Connection ~ 9200 4700
 $EndSCHEMATC
