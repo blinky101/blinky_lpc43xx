@@ -7,11 +7,11 @@ title: Tutorial Part 3
 The [previous tutorial](./tutorial_part2) showed how to get to a working c program and introduced some nice abstractions.
 In this tutorial, we will show a way to put common code into separate libraries and re-using them across projects.
 
-A common way to re-use code libraries is through a package manager. We are going to use [CPM: the C Package Manager](https://github.com/iauns/cpm). CPM is implemented in CMake, so we will switch from *Make* to *CMake* as our build system.
+A common way to re-use code libraries is through a package manager. We are going to use [CPM\: the C Package Manager](https://github.com/iauns/cpm). CPM is implemented in CMake, so we will switch from *Make* to *CMake* as our build system.
 
 ## CPM packages
 
-The basic principle is this: in the CMake build system, we include a file that implements [CPM:](https://github.com/iauns/cpm). We can then list our dependencies, which are either [git](https://git-scm.com/) repositories or local folders. For example:
+The basic principle is this: in the CMake build system, we include a file that implements [CPM](https://github.com/iauns/cpm). We can then list our dependencies, which are either [git](https://git-scm.com/) repositories or local folders. For example:
 
 ```
 CPM_AddModule("chip_lpc43xx_m4"
