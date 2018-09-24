@@ -2,7 +2,7 @@
 
 <img src="img/lpc43xx.jpg" alt="LPC43xx microcontroller chip" width="200">
 
-The LPC43xx microcontrollers are fairly advanced 32 bit dual-core microcontrollers. They have a cortex-m4 as well as a cortex-m0 cpu, both running at up to 204MHz. This platform has lots of peripherals, such as integrated high-speed USB 2.0, SGPIO, etc. If you just want do perform simple tasks, the [LPC11uxx](../lpc11uxx) may be a more suitable solution: it is cheaper and more suitable for beginners.
+The LPC43xx microcontrollers are fairly advanced 32 bit dual-core microcontrollers. They have a cortex-m4 as well as a cortex-m0 cpu, both running at up to 204MHz. This platform has lots of peripherals, such as integrated high-speed USB 2.0, SGPIO, etc. If you just want to perform simple tasks, the [LPC11uxx](../lpc11uxx) may be a more suitable solution: it is cheaper and more suitable for beginners.
 
 The purpose of this guide is to document the steps required to get started on this platform from scratch, using just a few open-source tools.
 
