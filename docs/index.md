@@ -23,7 +23,7 @@ Build your own blinky project from scratch and understand what is happening with
 
 * [Part 0: Getting Started](./getting_started)
 * [Part 1: Bare-metal Blinky](./tutorial_part1)
-* ~~[Part 2: Basic Blinky](./tutorial_part2)~~ **Under construction**
+* [Part 2: Basic Blinky](./tutorial_part2)
 * ~~[Part 3: CPM Blinky](./tutorial_part3)~~  **Under construction**
 
 ## Repository
