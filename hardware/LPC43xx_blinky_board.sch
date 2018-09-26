@@ -269,7 +269,7 @@ F 1 "12MHz" V 1655 5919 50  0000 R CNN
 F 2 "Crystal:Crystal_SMD_TXC_7A-2Pin_5.0x3.2mm" H 1700 6050 50  0001 C CNN
 F 3 "~" H 1700 6050 50  0001 C CNN
 	1    1700 6050
-	0    -1   -1   0   
+	0    1    1    0   
 $EndComp
 Wire Wire Line
 	1700 5900 1700 5850
@@ -2092,4 +2092,55 @@ $EndComp
 Wire Wire Line
 	9000 5100 8950 5100
 Connection ~ 8950 5100
+$Comp
+L Connector:Conn_01x04_Male J5
+U 1 1 5BACCD71
+P 14850 5700
+F 0 "J5" H 14956 5978 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 14956 5887 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 14850 5700 50  0001 C CNN
+F 3 "~" H 14850 5700 50  0001 C CNN
+	1    14850 5700
+	1    0    0    -1  
+$EndComp
+Text Label 4200 6200 0    50   ~ 0
+SWDCLK
+Text Label 4200 6300 0    50   ~ 0
+SWDIO
+$Comp
+L power:+3V3 #PWR01
+U 1 1 5BACEA4B
+P 15400 5600
+F 0 "#PWR01" H 15400 5450 50  0001 C CNN
+F 1 "+3V3" H 15415 5773 50  0000 C CNN
+F 2 "" H 15400 5600 50  0001 C CNN
+F 3 "" H 15400 5600 50  0001 C CNN
+	1    15400 5600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15050 5600 15400 5600
+$Comp
+L power:GND #PWR02
+U 1 1 5BAE2549
+P 15400 5900
+F 0 "#PWR02" H 15400 5650 50  0001 C CNN
+F 1 "GND" H 15405 5727 50  0000 C CNN
+F 2 "" H 15400 5900 50  0001 C CNN
+F 3 "" H 15400 5900 50  0001 C CNN
+	1    15400 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15050 5900 15400 5900
+Text Label 15150 5800 0    50   ~ 0
+SWDCLK
+Wire Wire Line
+	15050 5800 15150 5800
+Text Label 15150 5700 0    50   ~ 0
+SWDIO
+Wire Wire Line
+	15050 5700 15150 5700
+Text Notes 14350 5250 0    79   ~ 16
+== Extra SWD Header ==
 $EndSCHEMATC
