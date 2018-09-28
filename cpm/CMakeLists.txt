@@ -33,7 +33,11 @@ message(STATUS "Config POWER_TARGET: ${POWER_TARGET}")
 
 set(SYSTEM_LIBRARIES    m c gcc)
 
-set(FLAGS_M4 "-mcpu=cortex-m4")
+# M4 core has hardware floating point support
+add_definitions(-D__FPU_PRESENT)
+set(FLOAT_FLAGS "-mfloat-abi=hard -mfpu=fpv4-sp-d16")
+
+set(FLAGS_M4 "-mcpu=cortex-m4 ${FLOAT_FLAGS}")
 
 set(C_FLAGS "-O${OPTIMIZE} -g3 -c -fmessage-length=80 -fno-builtin   \
     -ffunction-sections -fdata-sections -std=gnu99 -mthumb      \

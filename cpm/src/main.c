@@ -24,6 +24,7 @@ void SysTick_Handler(void)
     GPIO_HAL_toggle(led_xplorer);
 }
 
+
 int main(void) {
     // board-specific setup
     board_setup();
