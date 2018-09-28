@@ -1,7 +1,23 @@
 #include "board.h"
+#include "board_GPIO_ID.h"
+
+#include <lpc_tools/boardconfig.h>
+#include <lpc_tools/GPIO_HAL.h>
+#include <c_utils/static_assert.h>
+
 #include <chip.h>
 
-static const PINMUX_GRP_T pinmuxing[] = {
+// Oscillator frequency, needed by chip libraries
+const uint32_t OscRateIn = 12000000;
+const uint32_t ExtRateIn = 0;
+
+static const NVICConfig NVIC_config[] = {
+    {SysTick_IRQn,       1},     // systick timer: high priority
+                                 // (the priority does not matter in this
+                                 // example, because there is only one IRQ)
+};
+
+static const PinMuxConfig pinmuxing[] = {
 
         // Board LEDs 
 
@@ -12,25 +28,30 @@ static const PINMUX_GRP_T pinmuxing[] = {
         {2, 12, (SCU_MODE_FUNC0)}, // GPIO1[12]
 };
 
-void board_setup_muxing(void)
-{
-    Chip_SCU_SetPinMuxing(pinmuxing, sizeof(pinmuxing) / sizeof(PINMUX_GRP_T));
-}
+static const GPIOConfig pin_config[] = {
+    {{0,  13}, GPIO_CFG_DIR_OUTPUT_LOW},     // GPIO_ID_LED_JITTER
+    {{1,  12}, GPIO_CFG_DIR_OUTPUT_LOW},     // GPIO_ID_LED_XPLORER
+};
 
-void board_setup_GPIO(void)
-{
-    // jitter breakout
-    Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, 13);
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 13, false);
+// pin config struct should match GPIO_ID enum
+STATIC_ASSERT( (GPIO_ID_MAX == (sizeof(pin_config)/sizeof(GPIOConfig))));
 
-    // ngx xplorer
-    Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 1, 12);
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 1, 12, false);
-}
+static const BoardConfig config = {
+    .nvic_configs = NVIC_config,
+    .nvic_count = sizeof(NVIC_config) / sizeof(NVIC_config[0]),
 
-void board_setup_pins(void)
+    .pinmux_configs = pinmuxing,
+    .pinmux_count = sizeof(pinmuxing) / sizeof(pinmuxing[0]),
+    
+    .GPIO_configs = pin_config,
+    .GPIO_count = sizeof(pin_config) / sizeof(pin_config[0]),
+
+    .ADC_configs = NULL,
+    .ADC_count = 0
+};
+
+void board_setup(void)
 {
-    board_setup_muxing();
-    board_setup_GPIO();
+    board_set_config(&config);
 }
 

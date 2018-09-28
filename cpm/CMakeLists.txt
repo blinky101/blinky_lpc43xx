@@ -47,7 +47,7 @@ set(L_FLAGS "-fmessage-length=80 -nostdlib -specs=nano.specs \
 set(MCU_PLATFORM    43xx_m4)
 
 add_definitions("${FLAGS_M4} ${C_FLAGS} ${C_FLAGS_WARN}")
-add_definitions(-DCORE_M4)
+add_definitions(-DCORE_M4 -DMCU_PLATFORM_${MCU_PLATFORM})
 
 
 set(ELF_PATH            "${CMAKE_CURRENT_BINARY_DIR}/${EXE_NAME}")
@@ -62,9 +62,17 @@ CPM_AddModule("startup_lpc43xx_m4"
     GIT_REPOSITORY "https://github.com/JitterCompany/startup_lpc43xx_m4.git"
     GIT_TAG "1.2")
 
+CPM_AddModule("lpc_tools"
+    GIT_REPOSITORY "https://github.com/JitterCompany/lpc_tools.git"
+    GIT_TAG "2.6.2")
+
 CPM_AddModule("chip_lpc43xx_m4"
     GIT_REPOSITORY "https://github.com/JitterCompany/chip_lpc43xx_m4.git"
     GIT_TAG "3.3.0")
+
+CPM_AddModule("c_utils"
+    GIT_REPOSITORY "https://github.com/JitterCompany/c_utils.git"
+    GIT_TAG "1.4.5")
 
 CPM_AddModule("mcu_debug"
     GIT_REPOSITORY "https://github.com/JitterCompany/mcu_debug.git"
