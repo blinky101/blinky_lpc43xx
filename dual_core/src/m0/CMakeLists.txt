@@ -35,9 +35,17 @@ CPM_AddModule("startup_lpc43xx_m0"
     GIT_REPOSITORY "https://github.com/JitterCompany/startup_lpc43xx_m0.git"
     GIT_TAG "1.1")
 
+CPM_AddModule("lpc_tools"
+    GIT_REPOSITORY "https://github.com/JitterCompany/lpc_tools.git"
+    GIT_TAG "2.6.2")
+
 CPM_AddModule("chip_lpc43xx_m0"
     GIT_REPOSITORY "https://github.com/JitterCompany/chip_lpc43xx_m0.git"
     GIT_TAG "3.3.0")
+
+CPM_AddModule("c_utils"
+    GIT_REPOSITORY "https://github.com/JitterCompany/c_utils.git"
+    GIT_TAG "1.4.5")
 
 CPM_Finish()
 

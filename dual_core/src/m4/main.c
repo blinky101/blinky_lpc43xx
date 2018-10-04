@@ -1,12 +1,22 @@
-#include <chip.h>
 #include "board.h"
+#include "board_GPIO_ID.h"
 
-const uint32_t OscRateIn = 12000000;
-const uint32_t ExtRateIn = 0;
+#include <chip.h>
+#include <lpc_tools/boardconfig.h>
+#include <lpc_tools/GPIO_HAL.h>
+#include <lpc_tools/clock.h>
 
 unsigned int stack_value = 0xA5A55A5A;
 
+// Desired CPU frequency in Hz
+#define CPU_FREQ_HZ (60000000)
+
+// Address of the code for the M0 core
 #define M0_BOOT_ADDR (0x1B000000)
+
+const GPIO *led_jitter;
+const GPIO *led_xplorer;
+
 void M0_boot(uint32_t m0_image_addr)
 {
     // Make sure the alignment is OK
@@ -23,18 +33,31 @@ void M0_boot(uint32_t m0_image_addr)
     Chip_RGU_ClearReset(RGU_M0APP_RST);
 }
 
-int main(void) {
+int main(void)
+{
+    // board-specific setup
+    board_setup();
+    board_setup_NVIC();
     board_setup_pins();
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 2, true);
-    fpuInit();
 
+    // fpu & system clock setup
+    fpuInit();
+    clock_set_frequency(CPU_FREQ_HZ);
+
+    // initialize the M4 LED
+    led_jitter = board_get_GPIO(GPIO_ID_LED_M4_JITTER);
+    led_xplorer = board_get_GPIO(GPIO_ID_LED_M4_XPLORER);
+    GPIO_HAL_set(led_jitter, HIGH);
+    GPIO_HAL_set(led_xplorer, HIGH);
+
+    // boot the M0 core
     M0_boot(M0_BOOT_ADDR);
     
     while(1){
-        for(volatile int n=0;n<10000000;n++){} 
-        Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 13, true);
-        for(volatile int n=0;n<10000000;n++){} 
-        Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 13, false);
+        for(volatile int n=0;n<2000000;n++){} 
+        GPIO_HAL_toggle(led_jitter);
+        GPIO_HAL_toggle(led_xplorer);
+        for(volatile int n=0;n<2000000;n++){} 
     }
     return 0;
 }
