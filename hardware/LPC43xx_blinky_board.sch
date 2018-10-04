@@ -1897,7 +1897,6 @@ Wire Notes Line
 Wire Notes Line
 	11050 7650 500  7650
 NoConn ~ 9800 3750
-NoConn ~ 9800 4050
 NoConn ~ 9800 4350
 NoConn ~ 9800 4450
 NoConn ~ 7900 3750
@@ -1964,7 +1963,6 @@ Wire Wire Line
 	14750 8700 15350 8700
 Wire Wire Line
 	15350 8800 14750 8800
-NoConn ~ 12450 7450
 NoConn ~ 15350 8000
 NoConn ~ 15350 7700
 NoConn ~ 15350 7400
@@ -1989,18 +1987,18 @@ Wire Wire Line
 Wire Wire Line
 	7000 2050 6700 2050
 Wire Wire Line
-	7000 1950 6700 1950
+	3400 2950 3300 2950
 Wire Wire Line
-	7000 1850 6700 1850
+	3400 2850 3300 2850
 Wire Wire Line
 	7000 1750 6700 1750
-Text Label 7000 2050 0    50   ~ 0
+Text Label 3400 3050 0    50   ~ 0
 LED_RED
-Text Label 7000 1950 0    50   ~ 0
+Text Label 3400 2950 0    50   ~ 0
 LED_GREEN
-Text Label 7000 1850 0    50   ~ 0
+Text Label 3400 2850 0    50   ~ 0
 LED_BLUE
-Text Label 7000 1750 0    50   ~ 0
+Text Label 3400 2750 0    50   ~ 0
 LED_YELLOW
 Text Label 7000 2150 0    50   ~ 0
 USR_SW
@@ -2023,10 +2021,6 @@ NoConn ~ 1400 3850
 NoConn ~ 1400 3750
 NoConn ~ 1400 3650
 NoConn ~ 3300 3250
-NoConn ~ 3300 3050
-NoConn ~ 3300 2850
-NoConn ~ 3300 2750
-NoConn ~ 3300 2950
 NoConn ~ 3300 2350
 NoConn ~ 3300 2250
 NoConn ~ 3300 2150
@@ -2143,4 +2137,16 @@ Wire Wire Line
 	15050 5700 15150 5700
 Text Notes 14350 5250 0    79   ~ 16
 == Extra SWD Header ==
+Wire Wire Line
+	3300 3050 3400 3050
+Wire Wire Line
+	3300 2750 3400 2750
+Text Label 9950 4050 0    50   ~ 0
+USB_ID
+Wire Wire Line
+	9800 4050 9950 4050
+Text Label 11800 7450 0    50   ~ 0
+USB_ID
+Wire Wire Line
+	11800 7450 12450 7450
 $EndSCHEMATC
