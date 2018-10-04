@@ -38,17 +38,6 @@ F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 3200 4200 50
 $EndComp
 $Comp
 L JitterLib:LPC4337JBD144 U1
-U 2 1 5BAEFDE9
-P 5750 2900
-F 0 "U1" H 5050 4150 50  0000 C CNN
-F 1 "LPC4337JBD144" H 4800 4250 50  0000 C CNN
-F 2 "Package_QFP:LQFP-144_20x20mm_P0.5mm" H 6150 4300 50  0001 C CNN
-F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 6600 4200 50  0001 C CNN
-	2    5750 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L JitterLib:LPC4337JBD144 U1
 U 3 1 5BAEFE55
 P 8850 3500
 F 0 "U1" H 8200 4750 50  0000 C CNN
@@ -1749,9 +1738,9 @@ Wire Wire Line
 	4450 2450 4800 2450
 Text Label 14000 9150 0    50   ~ 0
 CLKIN
-Text Label 14000 7400 0    50   ~ 0
+Text Label 14000 7300 0    50   ~ 0
 UART_TX
-Text Label 14000 7500 0    50   ~ 0
+Text Label 14000 7400 0    50   ~ 0
 UART_RX
 Text Label 7550 3950 0    50   ~ 0
 AD0
@@ -1819,9 +1808,9 @@ Text Label 14000 9250 0    50   ~ 0
 WAKUP
 Text Label 14000 9350 0    50   ~ 0
 ALARM
-Text Label 14000 8000 0    50   ~ 0
+Text Label 14000 7700 0    50   ~ 0
 AD0
-Text Label 14000 8100 0    50   ~ 0
+Text Label 14000 7800 0    50   ~ 0
 AD1
 $Comp
 L Connector:Conn_01x10_Female J4
@@ -1835,17 +1824,17 @@ F 3 "~" H 14800 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14600 7400 14000 7400
+	14600 7300 14000 7300
 Wire Wire Line
-	14000 7500 14600 7500
+	14000 7400 14600 7400
 Wire Wire Line
-	14000 7800 14600 7800
+	14000 7900 14600 7900
 Wire Wire Line
-	14600 7900 14000 7900
+	14600 8000 14000 8000
 Wire Wire Line
-	14000 8000 14600 8000
+	14000 7700 14600 7700
 Wire Wire Line
-	14600 8100 14000 8100
+	14600 7800 14000 7800
 Wire Wire Line
 	14000 8650 14600 8650
 Wire Wire Line
@@ -1862,9 +1851,9 @@ Wire Wire Line
 	14000 9250 14600 9250
 Wire Wire Line
 	14600 9350 14000 9350
-Text Label 14000 7700 0    50   ~ 0
-SDA
 Text Label 14000 7600 0    50   ~ 0
+SDA
+Text Label 14000 7500 0    50   ~ 0
 SCL
 Wire Wire Line
 	14000 9450 14600 9450
@@ -1893,8 +1882,6 @@ Text Label 3400 3050 0    50   ~ 0
 LED_YELLOW
 Text Label 7000 2950 0    50   ~ 0
 USR_SW
-NoConn ~ 1400 1750
-NoConn ~ 1400 1850
 NoConn ~ 1400 2050
 NoConn ~ 1400 2350
 NoConn ~ 1400 2450
@@ -1905,16 +1892,10 @@ NoConn ~ 1400 3350
 NoConn ~ 1400 3450
 NoConn ~ 1400 3550
 NoConn ~ 1400 4050
-NoConn ~ 1400 3950
 NoConn ~ 1400 3850
 NoConn ~ 1400 3750
 NoConn ~ 1400 3650
 NoConn ~ 3300 3250
-NoConn ~ 3300 2350
-NoConn ~ 3300 2250
-NoConn ~ 3300 2150
-NoConn ~ 3300 2050
-NoConn ~ 3300 1950
 NoConn ~ 4800 1750
 NoConn ~ 4800 1850
 NoConn ~ 4800 1950
@@ -1935,14 +1916,9 @@ NoConn ~ 4800 3550
 NoConn ~ 4800 3650
 NoConn ~ 4800 3950
 NoConn ~ 4800 4050
-NoConn ~ 6700 2250
-NoConn ~ 6700 2350
-NoConn ~ 6700 2450
-NoConn ~ 6700 2550
 NoConn ~ 6700 2650
 NoConn ~ 6700 2750
 NoConn ~ 6700 2850
-NoConn ~ 6700 2150
 NoConn ~ 6700 3150
 NoConn ~ 6700 3250
 NoConn ~ 6700 3350
@@ -2091,10 +2067,6 @@ Text Notes 2950 8700 0    50   ~ 0
 Pullup and cap already in jtag section
 Wire Wire Line
 	6700 2950 7000 2950
-NoConn ~ 6700 2050
-NoConn ~ 6700 1950
-NoConn ~ 6700 1850
-NoConn ~ 6700 1750
 $Comp
 L Connector:Conn_01x04_Female J6
 U 1 1 5BCD9F4D
@@ -2153,18 +2125,220 @@ Wire Wire Line
 	14600 4300 14600 4400
 Connection ~ 14600 4400
 $Comp
-L Connector:Conn_01x08_Female J7
+L Connector:Conn_01x09_Female J7
 U 1 1 5BD58EF6
 P 14800 7700
-F 0 "J7" H 14827 7676 50  0000 L CNN
-F 1 "Conn_01x08_Female" H 14827 7585 50  0000 L CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 14800 7700 50  0001 C CNN
+F 0 "J7" H 14650 7100 50  0000 L CNN
+F 1 "Conn_01x08_Female" H 14050 7200 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x09_P2.54mm_Vertical" H 14800 7700 50  0001 C CNN
 F 3 "~" H 14800 7700 50  0001 C CNN
 	1    14800 7700
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14000 7600 14600 7600
+	14000 7500 14600 7500
 Wire Wire Line
-	14000 7700 14600 7700
+	14000 7600 14600 7600
+$Comp
+L Connector:Conn_01x16_Female J8
+U 1 1 5BE203E9
+P 15850 8050
+F 0 "J8" H 15877 8026 50  0000 L CNN
+F 1 "Conn_01x16_Female" H 15050 7000 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x16_P2.54mm_Vertical" H 15850 8050 50  0001 C CNN
+F 3 "~" H 15850 8050 50  0001 C CNN
+	1    15850 8050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad MH1
+U 1 1 5BE20C3A
+P 14900 1050
+F 0 "MH1" H 15000 1101 50  0000 L CNN
+F 1 "MountingHole_Pad" H 15000 1010 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_Pad_Via" H 14900 1050 50  0001 C CNN
+F 3 "~" H 14900 1050 50  0001 C CNN
+	1    14900 1050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad MH2
+U 1 1 5BE20E69
+P 14900 1500
+F 0 "MH2" H 15000 1551 50  0000 L CNN
+F 1 "MountingHole_Pad" H 15000 1460 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_Pad_Via" H 14900 1500 50  0001 C CNN
+F 3 "~" H 14900 1500 50  0001 C CNN
+	1    14900 1500
+	1    0    0    -1  
+$EndComp
+Text Label 950  3950 0    50   ~ 0
+SSP1_SCK
+Wire Wire Line
+	950  3950 1400 3950
+Text Label 900  1750 0    50   ~ 0
+SSP1_MISO
+Text Label 900  1850 0    50   ~ 0
+SSP1_MOSI
+Wire Wire Line
+	900  1850 1400 1850
+Wire Wire Line
+	900  1750 1400 1750
+Text Label 14000 8000 0    50   ~ 0
+SSP1_MISO
+Text Label 14000 8100 0    50   ~ 0
+SSP1_MOSI
+Text Label 14000 7900 0    50   ~ 0
+SSP1_SCK
+Wire Wire Line
+	14000 8100 14600 8100
+$Comp
+L power:GND #PWR0101
+U 1 1 5BF4C8C1
+P 15350 8850
+F 0 "#PWR0101" H 15350 8600 50  0001 C CNN
+F 1 "GND" H 15355 8677 50  0000 C CNN
+F 2 "" H 15350 8850 50  0001 C CNN
+F 3 "" H 15350 8850 50  0001 C CNN
+	1    15350 8850
+	1    0    0    -1  
+$EndComp
+Text Label 3400 1950 0    50   ~ 0
+P2_2
+Text Label 3400 2050 0    50   ~ 0
+P2_3
+Text Label 3400 2150 0    50   ~ 0
+P2_4
+Text Label 3400 2250 0    50   ~ 0
+P2_5
+Text Label 3400 2350 0    50   ~ 0
+P2_6
+Wire Wire Line
+	3400 1950 3300 1950
+Wire Wire Line
+	3300 2050 3400 2050
+Wire Wire Line
+	3400 2150 3300 2150
+Wire Wire Line
+	3300 2250 3400 2250
+Wire Wire Line
+	3400 2350 3300 2350
+Text Label 15300 8050 0    50   ~ 0
+P2_2
+Text Label 15300 7750 0    50   ~ 0
+P2_3
+Text Label 15300 7650 0    50   ~ 0
+P2_4
+Text Label 15300 7550 0    50   ~ 0
+P2_5
+Text Label 15300 7450 0    50   ~ 0
+P2_6
+Wire Wire Line
+	15650 7450 15300 7450
+Wire Wire Line
+	15300 7550 15650 7550
+Wire Wire Line
+	15650 7650 15300 7650
+Wire Wire Line
+	15300 7750 15650 7750
+Wire Wire Line
+	15300 8050 15650 8050
+Text Label 6950 2550 0    50   ~ 0
+P6_8
+Text Label 6950 2450 0    50   ~ 0
+P6_7
+Wire Wire Line
+	6700 2450 6950 2450
+Wire Wire Line
+	6950 2550 6700 2550
+Text Label 15300 7850 0    50   ~ 0
+P6_8
+Text Label 15300 7950 0    50   ~ 0
+P6_7
+Wire Wire Line
+	15300 7850 15650 7850
+Wire Wire Line
+	15650 7950 15300 7950
+Text Label 6950 2350 0    50   ~ 0
+P6_6
+Text Label 6950 2250 0    50   ~ 0
+P6_5
+Wire Wire Line
+	6700 2250 6950 2250
+Wire Wire Line
+	6950 2350 6700 2350
+Text Label 6950 2150 0    50   ~ 0
+P6_4
+Text Label 6950 2050 0    50   ~ 0
+P6_3
+Wire Wire Line
+	6700 2050 6950 2050
+Wire Wire Line
+	6950 2150 6700 2150
+Text Label 6950 1950 0    50   ~ 0
+P6_2
+Text Label 6950 1850 0    50   ~ 0
+P6_1
+Wire Wire Line
+	6700 1850 6950 1850
+Wire Wire Line
+	6950 1950 6700 1950
+Wire Wire Line
+	6950 1750 6700 1750
+Text Label 6950 1750 0    50   ~ 0
+P6_0
+$Comp
+L JitterLib:LPC4337JBD144 U1
+U 2 1 5BAEFDE9
+P 5750 2900
+F 0 "U1" H 5050 4150 50  0000 C CNN
+F 1 "LPC4337JBD144" H 4800 4250 50  0000 C CNN
+F 2 "Package_QFP:LQFP-144_20x20mm_P0.5mm" H 6150 4300 50  0001 C CNN
+F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 6600 4200 50  0001 C CNN
+	2    5750 2900
+	1    0    0    -1  
+$EndComp
+Text Label 15300 8150 0    50   ~ 0
+P6_6
+Text Label 15300 8250 0    50   ~ 0
+P6_5
+Text Label 15300 8350 0    50   ~ 0
+P6_4
+Text Label 15300 8450 0    50   ~ 0
+P6_3
+Text Label 15300 8550 0    50   ~ 0
+P6_2
+Text Label 15300 8650 0    50   ~ 0
+P6_1
+Text Label 15300 8750 0    50   ~ 0
+P6_0
+Wire Wire Line
+	15650 8150 15300 8150
+Wire Wire Line
+	15300 8250 15650 8250
+Wire Wire Line
+	15650 8350 15300 8350
+Wire Wire Line
+	15300 8450 15650 8450
+Wire Wire Line
+	15300 8550 15650 8550
+Wire Wire Line
+	15300 8650 15650 8650
+Wire Wire Line
+	15300 8750 15650 8750
+Wire Wire Line
+	15650 8850 15350 8850
+Wire Wire Line
+	15650 7350 15150 7350
+$Comp
+L power:GND #PWR0102
+U 1 1 5C341EBD
+P 15150 7350
+F 0 "#PWR0102" H 15150 7100 50  0001 C CNN
+F 1 "GND" H 15155 7177 50  0000 C CNN
+F 2 "" H 15150 7350 50  0001 C CNN
+F 3 "" H 15150 7350 50  0001 C CNN
+	1    15150 7350
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
