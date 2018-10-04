@@ -1,6 +1,7 @@
-# CPM-based blinky project: lpc43xx (m4 core)
+# CPM-based blinky project: lpc43xx (dual core)
 
-Simple Blinky program for the LPC4337 using CPM chip libraries.
+Dual core blinky program for the LPC4337 using CPM chip libraries.
+A program running on the cortex-M4 core blinks one LED, while the cortex-M0 independently blinks another LED.
 
 This projects assumes a lpc4337-based [lpc4330-xplorer board](https://www.nxp.com/support/developer-resources/nxp-designs/lpc4330-xplorer-board:OM13027), however it is easily adapted to different board configurations.
 
@@ -39,7 +40,7 @@ run this from the build dir, see build step
 make flash
 ```
 
-If everything went right, the firmware should be running and blinking a LED.
+If everything went right, the firmware should be running and blinking some LEDS.
 
 ## FAQ
 
