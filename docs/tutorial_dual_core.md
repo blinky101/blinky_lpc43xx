@@ -86,3 +86,5 @@ The M4 core is always in control of the M0 core, as it can assert the M0 reset a
 
 See the [dual core blinky project](https://github.com/blinky101/blinky_lpc43xx/tree/master/dual_core) for an working example.
 The example project source is split into the 'm0' and 'm4' folders, which contain the source code for each firmware.
+
+**NOTE:** If you do not use the chip library, be very carefull with writing directly to the `RESET_CTRLn` registers. For example: if you write a a 1 to some peripheral reset bit, you may accidentally clear the `M0APP_RST` bit as a side effect, causing the M0 to boot when you did not expect it. Definitely not fun to debug that situation (Old versions of the NXP-based chip library actually had this bug).
