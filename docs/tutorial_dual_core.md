@@ -75,8 +75,20 @@ This is done by the M4 core, in a few steps:
     
     (User manual UM10503, 15.4.1 table 172)
 
+If you use the [chip library](https://github.com/JitterCompany/chip_lpc43xx_m4), this results in the following code:
+```
+// Make sure the M0 core is in reset, enable the clock
+Chip_RGU_TriggerReset(RGU_M0APP_RST);
+Chip_Clock_Enable(CLK_M4_M0APP);
+
+// Configure the M0 boot address and release the reset
+Chip_CREG_SetM0AppMemMap(0x1B000000);
+Chip_RGU_ClearReset(RGU_M0APP_RST);
+
+```
+
 After these steps, the M0 core boots from the memory address as configured in the `M0APPMEMMAP` register.
-The M4 core is always in control of the M0 core, as it can assert the M0 reset at any time to stop or reboot the M0 core at any time.
+The M4 core is always in control of the M0 core, as it can assert the M0 reset at any time to stop or reboot the M0 core.
 
 See the [dual core blinky project](https://github.com/blinky101/blinky_lpc43xx/tree/master/dual_core) for an working example.
 The example project source is split into the 'm0' and 'm4' folders, which contain the source code for each firmware.
