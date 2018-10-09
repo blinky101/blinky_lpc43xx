@@ -85,6 +85,11 @@ For more info, check the [README](https://github.com/blinky101/blinky_lpc43xx/tr
 
 This concludes the tutorial series about the lpc43xx. We started with a [bare-metal](https://github.com/blinky101/blinky_lpc43xx/tree/master/bare-metal) project from scratch, got to a [basic](https://github.com/blinky101/blinky_lpc43xx/tree/master/basic) example and finally wrapped it all up in a [cpm package](https://github.com/blinky101/blinky_lpc43xx/tree/master/cpm).
 
+## There is more!
+
+Want to know more about the LPC43xx platform? We have more tutorials, such as [dual core: booting the M0 core](./tutorial_dual_core)!
+
 <div class="tutorial_nav">
   <a class="left" href="./tutorial_part2">◀ Tutorial Part 2</a>
+    <a class="right" href="./tutorial_dual_core">Tutorial: dual core blinky ▶</a>
 </div>
