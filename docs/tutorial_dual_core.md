@@ -84,7 +84,6 @@ Chip_Clock_Enable(CLK_M4_M0APP);
 // Configure the M0 boot address and release the reset
 Chip_CREG_SetM0AppMemMap(0x1B000000);
 Chip_RGU_ClearReset(RGU_M0APP_RST);
-
 ```
 
 After these steps, the M0 core boots from the memory address as configured in the `M0APPMEMMAP` register.
