@@ -56,24 +56,19 @@ This is done by the M4 core, in a few steps:
 * Make sure the M0 is in reset
 
     See the `RESET_CTRL1` register of the RGU, bit `M0APP_RST`
-    
-    (User manual UM10503, 15.4.1 table 172)
+    <br>(User manual UM10503, 15.4.1 table 172)
 * Enable the M0 clock
 
     See the `CLK_M4_M0APP_CFG` register of the CCU, bit `RUN`
-    
-    (User manual UM10503, 14.5.3 table 162)
+    <br>(User manual UM10503, 14.5.3 table 162)
 * Configure the M0 boot address
       
     See the `M0APPMEMMAP` register in CREG
-    
-    (User manual UM10503, 11.4.15)
-      
+    <br>(User manual UM10503, 11.4.15)    
 * Release the M0 reset
 
     See the `RESET_CTRL1` register of the RGU, bit `M0APP_RST`
-    
-    (User manual UM10503, 15.4.1 table 172)
+    <br>(User manual UM10503, 15.4.1 table 172)
 
 If you use the [chip library](https://github.com/JitterCompany/chip_lpc43xx_m4), this results in the following code:
 ```
