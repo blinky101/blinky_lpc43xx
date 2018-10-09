@@ -26,6 +26,9 @@ Build your own blinky project from scratch and understand what is happening with
 * [Part 2: Basic Blinky](./tutorial_part2)
 * [Part 3: CPM Blinky](./tutorial_part3)
 
+Extra tutorials:
+* [Dual core blinky: booting the M0 core](./tutorial_dual_core)
+
 ## Repository
 
 Each part of the tutorials result in a working blinky project. All projects (and also this website itself) can be found in the [blinky_lpc43xx repository](https://github.com/blinky101/blinky_lpc43xx).
