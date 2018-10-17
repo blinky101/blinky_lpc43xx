@@ -1,8 +1,8 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.0.0-3-g5ebb6b6)")
+(kicad_pcb (version 20171130) (host pcbnew "(5.0.1-3-g963ef8bb5)")
 
   (general
     (thickness 1.6)
-    (drawings 126)
+    (drawings 129)
     (tracks 941)
     (zones 0)
     (modules 66)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.2)
     (user_trace_width 0.2)
     (user_trace_width 0.3)
     (user_trace_width 0.4)
@@ -68,6 +68,7 @@
     (pad_size 1.524 1.524)
     (pad_drill 0.762)
     (pad_to_mask_clearance 0.075)
+    (solder_mask_min_width 0.25)
     (pad_to_paste_clearance_ratio -0.12)
     (aux_axis_origin 0 0)
     (visible_elements FFFFFF7F)
@@ -390,7 +391,7 @@
     (add_net VBUS)
   )
 
-  (module misc:Crystal_SMD_Abracon_ABS07-2Pin_3.6x1.9mm (layer F.Cu) (tedit 5BAB7FFF) (tstamp 5BACD116)
+  (module Jitter_Footprints:Crystal_SMD_Abracon_ABS07-2Pin_3.6x1.9mm (layer F.Cu) (tedit 5BC721C8) (tstamp 5BACD116)
     (at 147.5 73 180)
     (descr https://abracon.com/Resonators/ABS07.pdf)
     (tags "Crystal, abracon")
@@ -411,6 +412,37 @@
       (net 4 "Net-(C3-Pad2)"))
     (pad 2 smd rect (at 1.25 0 180) (size 1.1 1.9) (layers F.Cu F.Paste F.Mask)
       (net 5 "Net-(C4-Pad2)"))
+    (model :jitter:Crystal_3.2x1.5_ABS07-series.STEP
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz -90 0 0))
+    )
+  )
+
+  (module Jitter_Footprints:Crystal_SMD_TXC_7A-2Pin_5.0x3.2mm (layer F.Cu) (tedit 5BC72016) (tstamp 5BACD133)
+    (at 132.6 83.4 270)
+    (path /5BAF36FF)
+    (fp_text reference Y2 (at 0 0.05 270) (layer F.SilkS)
+      (effects (font (size 0.8 0.8) (thickness 0.1)))
+    )
+    (fp_text value 12MHz (at 1.4 3.2 270) (layer F.Fab)
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_line (start 3.2 2.1) (end 3.2 -2.1) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -3.2 2.1) (end 3.2 2.1) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -3.2 -2.1) (end -3.2 2.1) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 3.2 -2.1) (end -3.2 -2.1) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -2.5 1.6) (end 2.5 1.6) (layer F.SilkS) (width 0.15))
+    (fp_line (start -2.5 -1.6) (end 2.5 -1.6) (layer F.SilkS) (width 0.15))
+    (pad 2 smd rect (at 1.85 0 270) (size 1.7 2.4) (layers F.Cu F.Paste F.Mask)
+      (net 8 "Net-(C13-Pad1)"))
+    (pad 1 smd rect (at -1.85 0 270) (size 1.7 2.4) (layers F.Cu F.Paste F.Mask)
+      (net 7 "Net-(C12-Pad1)"))
+    (model :jitter:CRYSTAL_SMD_TXC_7A-2Pin_5.0x3.2mm.step
+      (offset (xyz -2.5 -1.58 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Capacitor_SMD:C_0402_1005Metric (layer F.Cu) (tedit 5B301BBE) (tstamp 5BACB58F)
@@ -2084,12 +2116,7 @@
       (net 42 /BOOT3))
     (pad 8 smd rect (at 4.45 -3.81 90) (size 1.5 1.1) (layers F.Cu F.Paste F.Mask)
       (net 49 "Net-(RN2-Pad5)"))
-    (model ${KISYS3DMOD}/Button_Switch_SMD.3dshapes/SW_DIP_SPSTx04_Slide_Omron_A6S-410x_W8.9mm_P2.54mm.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model ${KIPRJMOD}/A6S-4102-H.step
+    (model :jitter:A6S-4102-H.step
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 90))
@@ -2607,27 +2634,6 @@
     )
   )
 
-  (module Crystal:Crystal_SMD_TXC_7A-2Pin_5.0x3.2mm (layer F.Cu) (tedit 5B925948) (tstamp 5BACD133)
-    (at 132.6 83.4 270)
-    (path /5BAF36FF)
-    (fp_text reference Y2 (at 0 0.05 270) (layer F.SilkS)
-      (effects (font (size 0.8 0.8) (thickness 0.1)))
-    )
-    (fp_text value 12MHz (at 1.4 3.2 270) (layer F.Fab)
-      (effects (font (size 1 1) (thickness 0.15)))
-    )
-    (fp_line (start -2.5 -1.6) (end 2.5 -1.6) (layer F.SilkS) (width 0.15))
-    (fp_line (start -2.5 1.6) (end 2.5 1.6) (layer F.SilkS) (width 0.15))
-    (fp_line (start 3.2 -2.1) (end -3.2 -2.1) (layer F.CrtYd) (width 0.05))
-    (fp_line (start -3.2 -2.1) (end -3.2 2.1) (layer F.CrtYd) (width 0.05))
-    (fp_line (start -3.2 2.1) (end 3.2 2.1) (layer F.CrtYd) (width 0.05))
-    (fp_line (start 3.2 2.1) (end 3.2 -2.1) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at -1.85 0 270) (size 1.7 2.4) (layers F.Cu F.Paste F.Mask)
-      (net 7 "Net-(C12-Pad1)"))
-    (pad 2 smd rect (at 1.85 0 270) (size 1.7 2.4) (layers F.Cu F.Paste F.Mask)
-      (net 8 "Net-(C13-Pad1)"))
-  )
-
   (module Button_Switch_SMD:SW_DIP_SPSTx01_Slide_Omron_A6S-110x_W8.9mm_P2.54mm (layer F.Cu) (tedit 5AC88315) (tstamp 5BAD0FCF)
     (at 120.85 105.6 90)
     (descr "SMD 1x-dip-switch SPST Omron_A6S-110x, Slide, row spacing 8.9 mm (350 mils), body size  (see http://omronfs.omron.com/en_US/ecb/products/pdf/en-a6s.pdf)")
@@ -2682,12 +2688,7 @@
       (net 3 /BOOT_PIN))
     (pad 2 smd rect (at 4.45 0 90) (size 1.5 1.1) (layers F.Cu F.Paste F.Mask)
       (net 2 GND))
-    (model ${KISYS3DMOD}/Button_Switch_SMD.3dshapes/SW_DIP_SPSTx01_Slide_Omron_A6S-110x_W8.9mm_P2.54mm.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model ${KIPRJMOD}/A6S-1102-H.step
+    (model :jitter:A6S-1102-H.step
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 90))
@@ -3010,12 +3011,7 @@
       (net 22 /SD_DAT3))
     (pad 1 smd rect (at -3.2 -1.55 90) (size 0.8 1.5) (layers F.Cu F.Paste F.Mask)
       (net 23 /SD_DAT2))
-    (model ${KISYS3DMOD}/Connector_Card.3dshapes/microSD_HC_Wuerth_693072010801.wrl
-      (offset (xyz 0 -1.149999983968733 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model "${KIPRJMOD}/Micro SD Holder Wurth Elektronik 693072010801.STEP"
+    (model ":jitter:Micro SD Holder Wurth Elektronik 693072010801.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3896,6 +3892,11 @@
       (xy -2.620173 1.933271) (xy -2.53664 1.952468)) (layer F.SilkS) (width 0.01))
   )
 
+  (gr_line (start 176.8 73.8) (end 170.4 73.8) (layer F.SilkS) (width 0.2))
+  (gr_line (start 170.4 76.2) (end 176.8 76.2) (layer F.SilkS) (width 0.2))
+  (gr_text lpc43xx (at 173.5 75) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.1)))
+  )
   (gr_line (start 143.75 75) (end 143.5 74.75) (layer F.SilkS) (width 0.1))
   (gr_line (start 145.25 74.75) (end 145 74.25) (layer F.SilkS) (width 0.1))
   (gr_line (start 123.5 88.25) (end 123.5 89.5) (layer F.SilkS) (width 0.2))
@@ -5132,7 +5133,7 @@
   (segment (start 183.47 92.75) (end 184 92.22) (width 0.2) (layer F.Cu) (net 135))
   (segment (start 159.7 92.75) (end 183.47 92.75) (width 0.2) (layer F.Cu) (net 135))
 
-  (zone (net 2) (net_name GND) (layer Ground) (tstamp 0) (hatch edge 0.508)
+  (zone (net 2) (net_name GND) (layer Ground) (tstamp 5BC743C3) (hatch edge 0.508)
     (connect_pads yes (clearance 0.2))
     (min_thickness 0.2)
     (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
