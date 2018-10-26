@@ -26,7 +26,7 @@ F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex
 	-1   0    0    -1  
 $EndComp
 $Comp
-L JitterLib:LPC4337JBD144 U1
+L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib U1
 U 1 1 5BAEFD8F
 P 2350 2900
 F 0 "U1" H 1700 4150 50  0000 C CNN
@@ -48,7 +48,7 @@ F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 9700 4800 50
 	1    0    0    -1  
 $EndComp
 $Comp
-L JitterLib:LPC4337JBD144 U1
+L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib U1
 U 4 1 5BAEFEB7
 P 3150 6050
 F 0 "U1" H 2500 6750 50  0000 C CNN
@@ -2339,6 +2339,28 @@ F 1 "GND" H 15155 7177 50  0000 C CNN
 F 2 "" H 15150 7350 50  0001 C CNN
 F 3 "" H 15150 7350 50  0001 C CNN
 	1    15150 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BD4EF74
+P 14900 1600
+F 0 "#PWR?" H 14900 1350 50  0001 C CNN
+F 1 "GND" H 14905 1427 50  0000 C CNN
+F 2 "" H 14900 1600 50  0001 C CNN
+F 3 "" H 14900 1600 50  0001 C CNN
+	1    14900 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BDC39F5
+P 14900 1150
+F 0 "#PWR?" H 14900 900 50  0001 C CNN
+F 1 "GND" H 14905 977 50  0000 C CNN
+F 2 "" H 14900 1150 50  0001 C CNN
+F 3 "" H 14900 1150 50  0001 C CNN
+	1    14900 1150
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
