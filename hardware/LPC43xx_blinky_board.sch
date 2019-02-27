@@ -26,7 +26,7 @@ F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex
 	-1   0    0    -1  
 $EndComp
 $Comp
-L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib U1
+L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib-LPC43xx_blinky_board-rescue U1
 U 1 1 5BAEFD8F
 P 2350 2900
 F 0 "U1" H 1700 4150 50  0000 C CNN
@@ -37,18 +37,7 @@ F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 3200 4200 50
 	1    0    0    -1  
 $EndComp
 $Comp
-L JitterLib:LPC4337JBD144 U1
-U 3 1 5BAEFE55
-P 8850 3500
-F 0 "U1" H 8200 4750 50  0000 C CNN
-F 1 "LPC4337JBD144" H 7950 4850 50  0000 C CNN
-F 2 "Package_QFP:LQFP-144_20x20mm_P0.5mm" H 9250 4900 50  0001 C CNN
-F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 9700 4800 50  0001 C CNN
-	3    8850 3500
-	1    0    0    -1  
-$EndComp
-$Comp
-L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib U1
+L LPC43xx_blinky_board-rescue:LPC4337JBD144-JitterLib-LPC43xx_blinky_board-rescue U1
 U 4 1 5BAEFEB7
 P 3150 6050
 F 0 "U1" H 2500 6750 50  0000 C CNN
@@ -435,7 +424,7 @@ L Device:C C2
 U 1 1 5BB0F2E7
 P 13000 2350
 F 0 "C2" H 13115 2396 50  0000 L CNN
-F 1 "100nF" H 13115 2305 50  0000 L CNN
+F 1 "2.2nF" H 13115 2305 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 13038 2200 50  0001 C CNN
 F 3 "~" H 13000 2350 50  0001 C CNN
 	1    13000 2350
@@ -559,7 +548,6 @@ Wire Wire Line
 Connection ~ 8900 1550
 Wire Wire Line
 	8800 2100 8900 2100
-Connection ~ 8900 2100
 $Comp
 L power:GND #PWR012
 U 1 1 5BB6BD7E
@@ -607,11 +595,6 @@ F 4 "BLM15HG601SN1D" V 9150 5100 50  0001 C CNN "Manufacturer PartNo."
 $EndComp
 Wire Wire Line
 	8950 5100 8950 4900
-Wire Wire Line
-	8950 4900 8900 4900
-Connection ~ 8900 4900
-Wire Wire Line
-	8900 4900 8800 4900
 $Comp
 L power:GND #PWR013
 U 1 1 5BB71115
@@ -1238,9 +1221,9 @@ Wire Wire Line
 	1850 8450 950  8450
 Text Label 950  8750 0    50   ~ 0
 LED_RED
-Text Label 950  8550 0    50   ~ 0
-LED_GREEN
 Text Label 950  8650 0    50   ~ 0
+LED_GREEN
+Text Label 950  8550 0    50   ~ 0
 LED_BLUE
 Text Label 950  8450 0    50   ~ 0
 LED_YELLOW
@@ -1784,7 +1767,6 @@ Wire Notes Line
 	11050 550  11050 7650
 Wire Notes Line
 	11050 7650 500  7650
-NoConn ~ 9800 3750
 NoConn ~ 9800 4350
 NoConn ~ 9800 4450
 NoConn ~ 7900 3750
@@ -2363,4 +2345,34 @@ F 3 "" H 14900 1150 50  0001 C CNN
 	1    14900 1150
 	1    0    0    -1  
 $EndComp
+$Comp
+L power:VBUS #PWR?
+U 1 1 5C799C94
+P 10000 3750
+F 0 "#PWR?" H 10000 3600 50  0001 C CNN
+F 1 "VBUS" H 10015 3923 50  0000 C CNN
+F 2 "" H 10000 3750 50  0001 C CNN
+F 3 "" H 10000 3750 50  0001 C CNN
+	1    10000 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 4900 8900 4900
+Wire Wire Line
+	8900 4900 8800 4900
+Connection ~ 8900 4900
+Connection ~ 8900 2100
+$Comp
+L JitterLib:LPC4337JBD144 U1
+U 3 1 5BAEFE55
+P 8850 3500
+F 0 "U1" H 8200 4750 50  0000 C CNN
+F 1 "LPC4337JBD144" H 7950 4850 50  0000 C CNN
+F 2 "Package_QFP:LQFP-144_20x20mm_P0.5mm" H 9250 4900 50  0001 C CNN
+F 3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" H 9700 4800 50  0001 C CNN
+	3    8850 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9800 3750 10000 3750
 $EndSCHEMATC

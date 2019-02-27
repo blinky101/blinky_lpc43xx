@@ -821,11 +821,11 @@ X VDDREG 94 150 850 200 D 50 50 4 1 P N
 ENDDRAW
 ENDDEF
 #
-# LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib
+# LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib-LPC43xx_blinky_board-rescue
 #
-DEF LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib U 0 20 Y Y 4 L N
+DEF LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib-LPC43xx_blinky_board-rescue U 0 20 Y Y 4 L N
 F0 "U" -650 1250 50 H V C CNN
-F1 "LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib" 450 -1250 50 H V C CNN
+F1 "LPC43xx_blinky_board-rescue_LPC4337JBD144-JitterLib-LPC43xx_blinky_board-rescue" 450 -1250 50 H V C CNN
 F2 "Package_QFP:LQFP-144_20x20mm_P0.5mm" 400 1400 50 H I C CNN
 F3 "https://www.nxp.com/docs/en/data-sheet/LPC435X_3X_2X_1X.pdf" 850 1300 50 H I C CNN
 $FPLIST
